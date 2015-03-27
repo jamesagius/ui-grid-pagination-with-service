@@ -1,0 +1,29 @@
+<!doctype html>
+<html ng-app="app">
+<head>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular-touch.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular-animate.js"></script>
+    <script src="http://ui-grid.info/docs/grunt-scripts/csv.js"></script>
+    <script src="http://ui-grid.info/docs/grunt-scripts/pdfmake.js"></script>
+    <script src="http://ui-grid.info/docs/grunt-scripts/vfs_fonts.js"></script>
+    <!--<script src="http://ui-grid.info/release/ui-grid-unstable.js"></script>-->
+    <!--<link rel="stylesheet" href="http://ui-grid.info/release/ui-grid-unstable.css" type="text/css">-->
+
+    <script src="3.0.0-rc.19/ui-grid.js"></script>
+    <link rel="stylesheet" href="3.0.0-rc.19/ui-grid.css" type="text/css">
+
+    <link rel="stylesheet" href="main.css" type="text/css">
+</head>
+<body>
+
+<div ng-controller="MainCtrl">
+    <div ui-grid="sharedData.gridOptions" ui-grid-pagination class="grid"></div>
+</div>
+<div ng-controller="addCtrl">
+    <button ng-click="add()">Add One</button>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
