@@ -5,6 +5,16 @@ app.factory('sharedDataService', function() {
       return d;
 });
 
+app.controller('actionsCtrl', ['$scope', '$http','sharedDataService', function($scope,$http,sharedDataService) {
+$scope.sharedData = sharedDataService;
+
+$scope.alert = function(message) {
+    alert(message);
+}
+
+}]);
+
+
 app.controller('addCtrl', ['$scope', '$http','sharedDataService', function($scope,$http,sharedDataService) {
 $scope.sharedData = sharedDataService;
 
@@ -44,7 +54,8 @@ $scope.sharedData = sharedDataService;
     columnDefs: [
       { name: 'name' },
       { name: 'gender', enableSorting: true },
-      { name: 'company', enableSorting: true }
+      { name: 'company', enableSorting: true },
+      { name: 'Actions', enableSorting: false, cellTemplate: 'actions.html' }
     ],
     onRegisterApi: function(gridApi) {
       $scope.gridApi = gridApi;
