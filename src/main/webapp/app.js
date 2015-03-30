@@ -5,6 +5,15 @@ app.factory('sharedDataService', function() {
       return d;
 });
 
+app.controller('editCtrl', ['$scope', '$http','sharedDataService', function($scope,$http,sharedDataService) {
+$scope.sharedData = sharedDataService;
+
+$scope.doEdit = function(row) {
+    alert(row.name);
+}
+
+}]);
+
 app.controller('actionsCtrl', ['$scope', '$http','sharedDataService', function($scope,$http,sharedDataService) {
 $scope.sharedData = sharedDataService;
 
