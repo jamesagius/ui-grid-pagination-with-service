@@ -1,4 +1,4 @@
-var app = angular.module('app', ['ngTouch', 'ui.grid', 'ui.grid.pagination']);
+var app = angular.module('app', ['ngTouch', 'ui.grid', 'ui.grid.pagination','ui.grid.selection','ui.grid.expandable']);
 
 app.factory('sharedDataService', function() {
       var d = {};
@@ -51,6 +51,13 @@ $scope.sharedData = sharedDataService;
     paginationPageSize: 5,
     useExternalPagination: true,
     useExternalSorting: true,
+    enableRowSelection: true, enableRowHeaderSelection: false,
+     expandableRowTemplate: 'expandRowTemplate.html',
+    expandableRowHeight: 150,
+    //subGridVariable will be available in subGrid scope
+    expandableRowScope: {
+        subGridVariable: 'subGridScopeVariable'
+    },
     columnDefs: [
       { name: 'name' },
       { name: 'gender', enableSorting: true },
@@ -69,27 +76,26 @@ $scope.sharedData = sharedDataService;
         }
         getPage();
       });
+
       gridApi.pagination.on.paginationChanged($scope, function (newPage, pageSize) {
         $scope.sharedData.paginationOptions.pageNumber = newPage;
         $scope.sharedData.paginationOptions.pageSize = pageSize;
         getPage();
       });
+
+       gridApi.expandable.on.rowExpandedStateChanged($scope, function (row) {
+          if (row.isExpanded) {
+          $http.get('data/getRecord?name=' + row.entity.name)
+            .success(function(data) {
+                row.entity.allFields = data;
+            });
+          }
+      });
+
     }
   };
 
   var getPage = function() {
-    var url;
-    switch($scope.sharedData.paginationOptions.sort) {
-      case uiGridConstants.ASC:
-        url = 'https://cdn.rawgit.com/angular-ui/ui-grid.info/gh-pages/data/100_ASC.json';
-        break;
-      case uiGridConstants.DESC:
-        url = 'https://cdn.rawgit.com/angular-ui/ui-grid.info/gh-pages/data/100_DESC.json';
-        break;
-      default:
-        url = 'https://cdn.rawgit.com/angular-ui/ui-grid.info/gh-pages/data/100.json';
-        break;
-    }
 
     $http.get('data/get?sortDir='+$scope.sharedData.paginationOptions.sort+'&sortField='+
                                                     $scope.sharedData.paginationOptions.field)
