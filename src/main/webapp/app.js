@@ -1,18 +1,45 @@
-var app = angular.module('app', ['ngTouch', 'ui.grid', 'ui.grid.pagination','ui.grid.selection','ui.grid.expandable']);
+var app = angular.module('app', ['ngTouch','ui.router','ui.bootstrap','ui.grid', 'ui.grid.pagination','ui.grid.selection','ui.grid.expandable']);
+
+app.config(function($stateProvider, $urlRouterProvider){
+      $stateProvider
+          .state('grid', {
+              url: "/grid",
+              templateUrl: "grid.html"
+          })
+        .state('route1', {
+            url: "/route1",
+            templateUrl: "partials/route1.html"
+        })
+        .state('route1.list', {
+              url: "/list",
+              templateUrl: "partials/route1.list.html",
+              controller: function($scope){
+                $scope.items = ["A", "List", "Of", "Items"];
+              }
+        })
+        .state('route2', {
+            url: "/route2",
+            templateUrl: "partials/route2.html"
+        })
+        .state('route2.list', {
+              url: "/list",
+              templateUrl: "route2.list.html",
+              controller: function($scope){
+                $scope.things = ["A", "Set", "Of", "Things"];
+              }
+        })
+        .state('edit', {
+              url: "/edit/{id}",
+              templateUrl: "partials/edit.html",
+              controller: 'editCtrl'
+        })
+        ;
+});
 
 app.factory('sharedDataService', function() {
       var d = {};
       return d;
 });
-
-app.controller('editCtrl', ['$scope', '$http','sharedDataService', function($scope,$http,sharedDataService) {
-$scope.sharedData = sharedDataService;
-
-$scope.doEdit = function(row) {
-    alert(row.name);
-}
-
-}]);
 
 app.controller('actionsCtrl', ['$scope', '$http','sharedDataService', function($scope,$http,sharedDataService) {
 $scope.sharedData = sharedDataService;
