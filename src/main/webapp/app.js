@@ -41,12 +41,16 @@ app.factory('sharedDataService', function() {
       return d;
 });
 
-app.controller('actionsCtrl', ['$scope', '$http','sharedDataService', function($scope,$http,sharedDataService) {
+app.controller('actionsCtrl', ['$scope', '$http','$state','sharedDataService', function($scope,$http,$state,sharedDataService) {
 $scope.sharedData = sharedDataService;
 
 $scope.alert = function(message) {
     alert(message);
 }
+
+    $scope.doEdit = function(row) {
+        $state.go('edit',{id: row.name});
+    }
 
 }]);
 
@@ -73,6 +77,9 @@ app.controller('MainCtrl', ['$scope', '$http', 'uiGridConstants', 'sharedDataSer
 function($scope, $http, uiGridConstants, sharedDataService) {
 
 $scope.sharedData = sharedDataService;
+
+            delete $scope.sharedData.name;
+            delete $scope.sharedData.gender;
 
   $scope.sharedData.paginationOptions = {
     pageNumber: 1,

@@ -32,10 +32,6 @@ app.controller('editCtrl', ['$scope','$q', '$http','$state','$stateParams','$mod
         return $http.get('data/getRecord?name='+id);
     }
 
-    $scope.doEdit = function(row) {
-        alert(row.name);
-    }
-
 }]);
 
 app.controller('editModalInstanceCtrl', function ($scope, $modalInstance, sharedDataService) {
