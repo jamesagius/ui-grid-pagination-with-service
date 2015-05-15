@@ -16,14 +16,14 @@ import org.springframework.context.annotation.Configuration;
 @SpringBootApplication
 public class Application extends SpringBootServletInitializer {
 
-    @Bean
-    public FilterRegistrationBean filterRegistrationBean () {
-        MyFilter compressingFilter = new MyFilter();
-        FilterRegistrationBean registrationBean = new FilterRegistrationBean();
-        registrationBean.setFilter(compressingFilter);
-
-        return registrationBean;
-    }
+//    @Bean
+//    public FilterRegistrationBean filterRegistrationBean () {
+//        MyFilter compressingFilter = new MyFilter();
+//        FilterRegistrationBean registrationBean = new FilterRegistrationBean();
+//        registrationBean.setFilter(compressingFilter);
+//
+//        return registrationBean;
+//    }
 
     @Override
     protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {

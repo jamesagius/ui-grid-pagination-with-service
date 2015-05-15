@@ -20,13 +20,31 @@
     <link rel="stylesheet" href="3.0.0-rc.19/ui-grid.css" type="text/css">
 
     <link rel="stylesheet" href="main.css" type="text/css">
+
+    <script type="text/ng-template" id="accessModalContent.html">
+        <div class="modal-header">
+            <h3 class="modal-title">Consent to monitor</h3>
+        </div>
+        <div class="modal-body">
+            <div ng-repeat="comp in sharedData.comps | filter: myFilter">
+                <input type="checkbox" ng-model="sharedData.selectedComps[comp]" >{{comp}}
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-primary" ng-click="ok()">OK</button>
+        </div>
+    </script>
+
 </head>
-<body>
+<body ng-controller="mainCtrl">
 
 <div ng-include="'topnav.html'"></div>
 
-
-<div class="container-fluid">
+<div class="container-fluid" >
+    <div class="row">
+        <testingtrans ng-controller="testCtrl"></testingtrans>
+        {{sharedData}}
+    </div>
     <div class="row">
         <div class="col-md-3">
             <div ng-include="'sidenav.html'"></div>
@@ -40,8 +58,8 @@
 
 <div ng-include="'bottom.html'"></div>
 
-
 <script src="app.js"></script>
+<script src="mainCtrl.js"></script>
 <script src="//angular-ui.github.io/ui-router/release/angular-ui-router.js"></script>
 <script src="controllers/edit.js"></script>
 

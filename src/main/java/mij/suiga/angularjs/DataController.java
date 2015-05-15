@@ -14,6 +14,15 @@ public class DataController {
     @Autowired
     PlatStarDataRepository repository;
 
+    @RequestMapping(value = "/getUser", method = RequestMethod.GET)
+    @ResponseBody
+    Map<String,Object> getUser() throws Exception {
+        Map<String,Object> m = new HashMap<String, Object>();
+        m.put("lacs", Arrays.asList("E012333","ABCDEFG"));
+        m.put("comps", Arrays.asList("TK","SI","AA","BB"));
+        return m;
+    }
+
     @RequestMapping(value = "/getRecord", method = RequestMethod.GET)
     @ResponseBody
     Map<String,String> getRecord(@RequestParam(value = "name") String name) throws Exception {
