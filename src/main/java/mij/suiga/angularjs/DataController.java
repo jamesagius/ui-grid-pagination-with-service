@@ -14,6 +14,44 @@ public class DataController {
     @Autowired
     PlatStarDataRepository repository;
 
+    @RequestMapping(value = "/getDefaultCountry", method = RequestMethod.GET)
+    @ResponseBody
+    String getDefaultCountry() throws Exception {
+      return "CA";
+    };
+
+    @RequestMapping(value = "/getCountries", method = RequestMethod.GET)
+    @ResponseBody
+    List<Map<String,String>> getCountries() throws Exception {
+        List<Map<String,String>> list = new ArrayList<>();
+        Map<String,String> m = new HashMap<>();
+        m.put("name","United States");
+        m.put("digraph","US");
+        list.add(m);
+
+        m = new HashMap<>();
+        m.put("name","Canada");
+        m.put("digraph","CA");
+        list.add(m);
+
+        m = new HashMap<>();
+        m.put("name","Pakistan");
+        m.put("digraph","PK");
+        list.add(m);
+
+        m = new HashMap<>();
+        m.put("name","China");
+        m.put("digraph","CH");
+        list.add(m);
+
+        m = new HashMap<>();
+        m.put("name","Russia");
+        m.put("digraph","RU");
+        list.add(m);
+
+        return list;
+    }
+
     @RequestMapping(value = "/getUser", method = RequestMethod.GET)
     @ResponseBody
     Map<String,Object> getUser() throws Exception {

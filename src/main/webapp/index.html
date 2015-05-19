@@ -42,7 +42,9 @@
 
 <div class="container-fluid" >
     <div class="row">
-        <testingtrans ng-controller="testCtrl"></testingtrans>
+        <!--<testingtrans ng-controller="testCtrl"></testingtrans>-->
+        <select ng-options="item.digraph as item.name for item in countries" ng-model="country">
+        </select>
     </div>
     <div class="row">
         <div class="col-md-3">
