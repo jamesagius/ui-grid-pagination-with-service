@@ -49,42 +49,41 @@ app.controller('mainCtrl', ['$scope', '$http','$state','$modal','sharedDataServi
 function($scope,$http,$state,$modal,sharedDataService,accessService) {
     $scope.sharedData = sharedDataService;
 
-    $http.get('data/getCountries').
-        success(function(data, status, headers, config){
-            $scope.countries = data;
-
-            $http.get('data/getDefaultCountry').
-                success(function(data, status, headers, config){
-                    $scope.country = data;
-                });
-        });
-
     $http.get('data/getUser').
       success(function(data, status, headers, config) {
         $scope.sharedData.lacs = data.lacs;
         $scope.sharedData.comps = data.comps;
 
-//        accessService.verify(data.lacs).then(
-//            function(success) {
-//                var modalInstance = $modal.open({
-//                  templateUrl: 'accessModalContent.html',
-//                  controller: 'accessModalInstanceCtrl'
-//                });
-//
-//                modalInstance.result.then(
-//                    function (comps) {
-//                        console.log($scope.sharedData.selectedComps);
-//                    },
-//                    function (err) {
-//
-//                    }
-//                );
-//            },
-//            function(fail) {
-//                alert('Not Authorized');
-//                window.location.assign('accessdenied.html');
-//            }
-//        );
+        accessService.verify(data.lacs).then(
+            function(success) {
+                var modalInstance = $modal.open({
+                  templateUrl: 'accessModalContent.html',
+                  controller: 'accessModalInstanceCtrl'
+                });
+
+                modalInstance.result.then(
+                    function (comps) {
+                        console.log($scope.sharedData.selectedComps);
+                        $http.get('data/getCountries').
+                            success(function(data, status, headers, config){
+                                $scope.countries = data;
+
+                                $http.get('data/getDefaultCountry').
+                                    success(function(data, status, headers, config){
+                                        $scope.country = data;
+                                    });
+                            });
+                    },
+                    function (err) {
+
+                    }
+                );
+            },
+            function(fail) {
+                alert('Not Authorized');
+                window.location.assign('accessdenied.html');
+            }
+        );
       }).
       error(function(data, status, headers, config) {
         alert('error: ' + data);
