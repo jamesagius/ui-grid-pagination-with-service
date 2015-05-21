@@ -56,28 +56,27 @@ function($scope,$http,$state,$modal,sharedDataService,accessService) {
 
         accessService.verify(data.lacs).then(
             function(success) {
-                var modalInstance = $modal.open({
-                  templateUrl: 'accessModalContent.html',
-                  controller: 'accessModalInstanceCtrl'
-                });
-
-                modalInstance.result.then(
-                    function (comps) {
-                        console.log($scope.sharedData.selectedComps);
-                        $http.get('data/getCountries').
-                            success(function(data, status, headers, config){
-                                $scope.countries = data;
-
-                                $http.get('data/getDefaultCountry').
-                                    success(function(data, status, headers, config){
-                                        $scope.country = data;
-                                    });
-                            });
-                    },
-                    function (err) {
-
-                    }
-                );
+//                var modalInstance = $modal.open({
+//                  templateUrl: 'accessModalContent.html',
+//                  controller: 'accessModalInstanceCtrl'
+//                });
+//
+//                modalInstance.result.then(
+//                    function (comps) {
+//                        $http.get('data/getCountries').
+//                            success(function(data, status, headers, config){
+//                                $scope.countries = data;
+//
+//                                $http.get('data/getDefaultCountry').
+//                                    success(function(data, status, headers, config){
+//                                        $scope.country = data;
+//                                    });
+//                            });
+//                    },
+//                    function (err) {
+//
+//                    }
+//                );
             },
             function(fail) {
                 alert('Not Authorized');
@@ -94,6 +93,8 @@ function($scope,$http,$state,$modal,sharedDataService,accessService) {
 app.controller('accessModalInstanceCtrl', function ($scope, $modalInstance, sharedDataService) {
 
   $scope.sharedData = sharedDataService;
+
+var spinner = new Spinner().spin();
 
     $scope.myFilter = function (item) {
         return item === 'TK' || item === 'SI';

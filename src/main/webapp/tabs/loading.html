@@ -1,0 +1,10 @@
+<div>
+    <div ng-show="loading" class="my-loading-spinner-container">
+        <div class="panel panel-default">
+            <div class="panel-body" style="min-height: 200px;max-height: 200px;background-color: grey">
+                Processing...
+            </div>
+        </div>
+    </div>
+    <div ng-hide="loading" ng-transclude></div>
+</div>

@@ -2,6 +2,18 @@ var app = angular.module('app', ['ngTouch','ui.router','ui.bootstrap','ui.grid',
 
 app.config(function($stateProvider, $urlRouterProvider){
       $stateProvider
+                .state('tabs', {
+                    url: "/tabs",
+                    templateUrl: "tabs/main.html", controller: "tabsCtrl"
+                })
+
+.state('tabs.tab1', {url: "/tabs1", templateUrl: "tabs/tab1.html"})
+.state('tabs.tab2', {url: "/tabs2", templateUrl: "tabs/tab2.html"})
+.state('tabs.tab3', {url: "/tabs3", templateUrl: "tabs/tab3.html"})
+.state('tabs.tab4', {url: "/tabs4", templateUrl: "tabs/tab4.html"})
+
+
+
           .state('grid', {
               url: "/grid",
               templateUrl: "grid.html"
@@ -73,10 +85,13 @@ $scope.sharedData = sharedDataService;
 
    }}]);
 
-app.controller('MainCtrl', ['$scope', '$http', 'uiGridConstants', 'sharedDataService',
+app.controller('gridCtrl', ['$scope', '$http', 'uiGridConstants', 'sharedDataService',
 function($scope, $http, uiGridConstants, sharedDataService) {
 
 $scope.sharedData = sharedDataService;
+
+    $scope.viewLoading = true;
+
 
             delete $scope.sharedData.name;
             delete $scope.sharedData.gender;

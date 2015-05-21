@@ -14,6 +14,13 @@ public class DataController {
     @Autowired
     PlatStarDataRepository repository;
 
+    @RequestMapping(value = "/getRemoteData", method = RequestMethod.GET)
+    @ResponseBody
+    String getRemoteData() throws Exception {
+        Thread.sleep(5000);
+        return "some remote data";
+    };
+
     @RequestMapping(value = "/getDefaultCountry", method = RequestMethod.GET)
     @ResponseBody
     String getDefaultCountry() throws Exception {
